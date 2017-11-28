@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import './styles.styl';
+import './styles.scss';
 
 const defaultTimezones = require('./timezones.json');
 

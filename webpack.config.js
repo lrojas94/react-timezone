@@ -1,6 +1,6 @@
 const path = require('path');
 
-const minify = process.argv.indexOf('--minify') !== -1;
+const minify = process.argv.indexOf('-p') !== -1;
 
 module.exports = {
   entry: './src/index.js',
@@ -21,24 +21,25 @@ module.exports = {
     },
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
-          presets: ['react', 'es2015'],
+        options: {
+          presets: ['@babel/preset-react', '@babel/preset-es2015'],
         },
       },
       {
-        test: /\.json$/,
-        loader: 'json',
+        test: /\.scss$/,
+        use: [{
+          loader: 'style-loader', // creates style nodes from JS strings
+        }, {
+          loader: 'css-loader', // translates CSS into CommonJS
+        }, {
+          loader: 'sass-loader', // compiles Sass to CSS
+        }],
       },
-      {
-        test: /\.styl$/,
-        loader: 'style-loader!css-loader!stylus-loader',
-      },
-    ],
-  },
+    ]},
 };
 
