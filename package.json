@@ -22,9 +22,9 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
     "json-loader": "^0.5.4",
-    "style-loader": "^0.13.0",
+    "style-loader": "^0.19.0",
     "stylus": "^0.54.5",
-    "stylus-loader": "^2.3.1",
+    "stylus-loader": "^3.0.1",
     "webpack": "^1.12.9"
   },
   "peerDependencies": {

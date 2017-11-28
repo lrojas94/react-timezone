@@ -4,6 +4,10 @@ import classNames from 'classnames';
 
 import './styles.styl';
 
+const defaultTimezones = require('./timezones.json');
+
+export { defaultTimezones as timezones };
+
 export default class TimezonePicker extends React.Component {
   constructor(props) {
     super(props);
@@ -172,5 +176,5 @@ TimezonePicker.propTypes = {
 TimezonePicker.defaultProps = {
   disabled: false,
   inputProps: {},
-  timezones: require('./timezones.json'), // eslint-disable-line
+  timezones: defaultTimezones, // eslint-disable-line
 };
