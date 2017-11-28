@@ -1,12 +1,21 @@
 const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-const minify = process.argv.indexOf('-p') !== -1;
+
+const isProdBuild = process.argv.indexOf('-p') !== -1;
+const filename = isProdBuild ? 'react-timezone.min' : 'react-timezone';
+
+const extractSass = new ExtractTextPlugin({
+  filename: `${filename}.css`,
+});
+
+const plugins = [extractSass];
 
 module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: minify ? 'react-timezone.min.js' : 'react-timezone.js',
+    filename: `${filename}.js`,
     library: 'ReactTimezone',
     libraryTarget: 'umd',
   },
@@ -32,15 +41,18 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [{
-          loader: 'style-loader', // creates style nodes from JS strings
-        }, {
-          loader: 'css-loader', // translates CSS into CommonJS
-        }, {
-          loader: 'sass-loader', // compiles Sass to CSS
-        }],
+        use: extractSass.extract({
+          use: [{
+            loader: 'css-loader',
+          }, {
+            loader: 'sass-loader',
+          }],
+          // use style-loader in development
+          fallback: 'style-loader',
+        }),
       },
     ],
   },
+  plugins,
 };
 
