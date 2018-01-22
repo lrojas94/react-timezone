@@ -65,7 +65,7 @@ export default class TimezonePicker extends React.Component {
   handleKeyPress(e) {
     if (e.which === 38 || e.which === 40) {
       e.preventDefault();
-      let focused = this.state.focused;
+      let { focused } = this.state;
       if (e.which === 38) {
         focused -= 1;
         if (focused < 1) focused = this.state.timezones.length;
@@ -106,7 +106,7 @@ export default class TimezonePicker extends React.Component {
   }
   render() {
     const { inputProps } = this.props;
-    const value = this.state.value;
+    const { value } = this.state;
 
     const isSelected = !this.state.open && value;
     const isOpen = this.state.open;
@@ -114,12 +114,13 @@ export default class TimezonePicker extends React.Component {
     return (
       <div
         className={
-          classNames('timezone-picker',
+          classNames(
+            'timezone-picker',
             {
               'timezone-picker-open': isOpen,
               'timezone-picker-selected': isSelected,
             },
-            this.props.className
+            this.props.className,
           )
         }
         style={this.props.style}
@@ -142,13 +143,14 @@ export default class TimezonePicker extends React.Component {
             .map((zone, index) => {
               const focused = this.state.focused === index + 1;
               return (
-                <li
-                  key={index}
+                <li  // eslint-disable-line
+                  key={zone}
                   title={zone}
                   onMouseDown={() => this.handleSelect(index)}
                   className={
-                    classNames('timezone-picker-list-item',
-                      { 'timezone-picker-list-item-active': focused }
+                    classNames(
+                      'timezone-picker-list-item',
+                      { 'timezone-picker-list-item-active': focused },
                     )
                   }
                 >
@@ -165,15 +167,16 @@ export default class TimezonePicker extends React.Component {
 TimezonePicker.propTypes = {
   defaultValue: PropTypes.string,
   disabled: PropTypes.bool,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
+  value: PropTypes.string, // eslint-disable-line
+  onChange: PropTypes.func, // eslint-disable-line
+  className: PropTypes.string, // eslint-disable-line
   style: PropTypes.object, // eslint-disable-line
   inputProps: PropTypes.object, // eslint-disable-line
   timezones: PropTypes.object, // eslint-disable-line
 };
 
 TimezonePicker.defaultProps = {
+  defaultValue: '',
   disabled: false,
   inputProps: {},
   timezones: defaultTimezones, // eslint-disable-line

@@ -683,7 +683,8 @@ function (_React$Component) {
       }, this.state.timezones.map(function (zone, index) {
         var focused = _this3.state.focused === index + 1;
         return _react.default.createElement("li", {
-          key: index,
+          // eslint-disable-line
+          key: zone,
           title: zone,
           onMouseDown: function onMouseDown() {
             return _this3.handleSelect(index);
@@ -704,8 +705,11 @@ TimezonePicker.propTypes = {
   defaultValue: _propTypes.default.string,
   disabled: _propTypes.default.bool,
   value: _propTypes.default.string,
+  // eslint-disable-line
   onChange: _propTypes.default.func,
+  // eslint-disable-line
   className: _propTypes.default.string,
+  // eslint-disable-line
   style: _propTypes.default.object,
   // eslint-disable-line
   inputProps: _propTypes.default.object,
@@ -714,6 +718,7 @@ TimezonePicker.propTypes = {
 
 };
 TimezonePicker.defaultProps = {
+  defaultValue: '',
   disabled: false,
   inputProps: {},
   timezones: defaultTimezones // eslint-disable-line
